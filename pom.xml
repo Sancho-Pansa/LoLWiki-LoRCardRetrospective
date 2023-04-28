@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
+    <groupId>io.sanchopansa.lolwiki</groupId>
     <artifactId>LoRCardRetrospective</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
@@ -21,5 +21,24 @@
             <version>2.10.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <outputDirectory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\out</outputDirectory>
+        <testOutputDirectory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\out\test-classes</testOutputDirectory>
+
+        <resources>
+            <resource>
+                <directory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\src\main\resources</directory>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\src\test\resources</directory>
+            </testResource>
+        </testResources>
+
+        <directory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\target</directory>
+        <finalName>LoRCardRetrospective-1.0</finalName>
+    </build>
     
 </project>
