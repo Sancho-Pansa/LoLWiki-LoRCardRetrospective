@@ -9,8 +9,5 @@
         <module name="LoRCardRetrospective" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="LoRCardRetrospective" target="18" />
-    </bytecodeTargetLevel>
   </component>
 </project>

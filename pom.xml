@@ -9,8 +9,8 @@
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -22,22 +22,22 @@
         </dependency>
     </dependencies>
     <build>
-        <outputDirectory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\out</outputDirectory>
-        <testOutputDirectory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\out\test-classes</testOutputDirectory>
+        <outputDirectory>${basedir}\out</outputDirectory>
+        <testOutputDirectory>${basedir}\out\test-classes</testOutputDirectory>
 
         <resources>
             <resource>
-                <directory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\src\main\resources</directory>
+                <directory>${basedir}\src\resources</directory>
             </resource>
         </resources>
 
         <testResources>
             <testResource>
-                <directory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\src\test\resources</directory>
+                <directory>${basedir}\src\test\resources</directory>
             </testResource>
         </testResources>
 
-        <directory>C:\Users\v.zuev\IdeaProjects\LoRCardRetrospective\target</directory>
+        <directory>${basedir}\target</directory>
         <finalName>LoRCardRetrospective-1.0</finalName>
     </build>
     

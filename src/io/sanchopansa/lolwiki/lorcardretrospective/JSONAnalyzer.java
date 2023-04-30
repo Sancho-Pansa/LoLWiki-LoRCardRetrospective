@@ -23,6 +23,7 @@ public class JSONAnalyzer {
             String name = jReader.nextName();
             switch (name) {
                 case "cardCode" -> cardBuilder.cardCode(jReader.nextString());
+                case "name" -> cardBuilder.cardName(jReader.nextString());
                 case "type" -> cardBuilder.type(jReader.nextString());
                 case "subtypes" -> cardBuilder.subType(parseJsonSubArray(jReader));
                 case "rarityRef" -> cardBuilder.rarity(jReader.nextString());

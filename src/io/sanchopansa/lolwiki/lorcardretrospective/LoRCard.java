@@ -2,9 +2,12 @@ package io.sanchopansa.lolwiki.lorcardretrospective;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public class LoRCard {
     private String cardCode;
+    private String cardName;
     private String type;
     private List<String> subType;
     private String rarity;
@@ -28,6 +31,7 @@ public class LoRCard {
 
     }
     public LoRCard(String cardCode,
+                   String cardName,
                    String type,
                    List<String> subType,
                    String rarity,
@@ -43,6 +47,7 @@ public class LoRCard {
                    String artists,
                    List<String> regions) {
         this.cardCode = cardCode;
+        this.cardName = cardName;
         this.type = type;
         this.subType = subType;
         this.rarity = rarity;
@@ -65,6 +70,14 @@ public class LoRCard {
 
     public void setCardCode(String cardCode) {
         this.cardCode = cardCode;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 
     public String getType() {
@@ -179,6 +192,41 @@ public class LoRCard {
         this.regions = regions;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoRCard loRCard = (LoRCard) o;
+        return Objects.equals(cardCode, loRCard.cardCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardCode);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sBuilder = new StringBuilder();
+        sBuilder
+                .append(String.format("ID: %s\n", this.cardCode))
+                .append(String.format("\tName: %s\n", this.cardName))
+                .append(String.format("\tCollectible: %s\n", this.collectible))
+                .append(String.format("\tRarity: %s\n", this.rarity))
+                .append(String.format("\tType: %s\n", this.type))
+                .append(String.format("\tSubtype: %s\n", this.subType.isEmpty() ? "(none)" : this.subType.toString()))
+                .append(String.format("\tSubtype: %s\n", this.keywords.isEmpty() ? "(none)" : this.keywords.toString()))
+                .append(String.format("\tCost: %d\n", this.cost))
+                .append(String.format("\tPower: %d\n", this.power))
+                .append(String.format("\tHealth: %d\n", this.health))
+                .append(String.format("\tPower: %d\n", this.power))
+                .append(String.format("\tDescription: %s\n", this.desc))
+                .append(this.lvlDesc.equals("") ? String.format("\tLevel Up Description: %s\n", this.lvlDesc) : "")
+                .append(String.format("\tFlavour: %s\n", this.flavour))
+                .append(String.format("\tArtist: %s\n", this.artists));
+        return sBuilder.toString();
+    }
+
     public static class cardBuilder {
         private final LoRCard newCard;
 
@@ -187,6 +235,11 @@ public class LoRCard {
         }
         public cardBuilder cardCode(String cardCode) {
             this.newCard.cardCode = cardCode;
+            return this;
+        }
+
+        public cardBuilder cardName(String cardName) {
+            this.newCard.cardName = cardName;
             return this;
         }
 
@@ -261,6 +314,10 @@ public class LoRCard {
         }
 
         public LoRCard build() {
+            if(this.newCard.subType == null)
+                this.newCard.subType = new ArrayList<>(0);
+            if(this.newCard.keywords == null)
+                this.newCard.keywords = new ArrayList<>(0);
             if(this.newCard.formats == null)
                 this.newCard.formats = new ArrayList<>(0);
             if(this.newCard.regions == null)
