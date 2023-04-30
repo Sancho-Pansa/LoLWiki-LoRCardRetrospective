@@ -38,9 +38,7 @@ public class LoRCardRetrospector {
     }
 
     private void printCardHistory(List<LoRCard> cardHistory) {
-        BiConsumer<String, String> printDifference = (a, b) -> {
-            System.out.println(String.format("%s → %s", a.toString(), b.toString()));
-        };
+        BiConsumer<String, String> printDifference = (a, b) -> System.out.printf("%s → %s%n", a, b);
         for(int i = 1; i < cardHistory.size(); i++) {
             LoRCard a = cardHistory.get(i - 1);
             LoRCard b = cardHistory.get(i);
@@ -60,19 +58,19 @@ public class LoRCardRetrospector {
                 if(!a.getArtists().equals(b.getArtists()))
                     printDifference.accept(a.getArtists(), b.getArtists());
                 if(a.getCost() != b.getCost())
-                    System.out.println(String.format("%d → %d", a.getCost(), b.getCost()));
+                    System.out.printf("%d → %d%n", a.getCost(), b.getCost());
                 if(a.getPower() != b.getPower())
-                    System.out.println(String.format("%d → %d", a.getPower(), b.getPower()));
+                    System.out.printf("%d → %d%n", a.getPower(), b.getPower());
                 if(a.getHealth() != b.getHealth())
-                    System.out.println(String.format("%d → %d", a.getHealth(), b.getHealth()));
+                    System.out.printf("%d → %d%n", a.getHealth(), b.getHealth());
                 if(a.isCollectible() != b.isCollectible())
-                    System.out.println(String.format("%s → %s", a.isCollectible(), b.isCollectible()));
+                    System.out.printf("%s → %s%n", a.isCollectible(), b.isCollectible());
                 if(a.getKeywords() != b.getKeywords())
-                    System.out.println(String.format("%s → %s", a.getKeywords(), b.getKeywords()));
+                    System.out.printf("%s → %s%n", a.getKeywords(), b.getKeywords());
                 if(a.getSubType() != b.getSubType())
-                    System.out.println(String.format("%s → %s", a.getSubType(), b.getSubType()));
+                    System.out.printf("%s → %s%n", a.getSubType(), b.getSubType());
                 if(a.getFormats() != b.getFormats())
-                    System.out.println(String.format("%s → %s", a.getFormats(), b.getFormats()));
+                    System.out.printf("%s → %s%n", a.getFormats(), b.getFormats());
             }
         }
     }
@@ -92,7 +90,6 @@ public class LoRCardRetrospector {
     }
 
     private String getSetFromCode() {
-        String setCode = cardCode.substring(1, 2);
-        return setCode;
+        return cardCode.substring(1, 2);
     }
 }
