@@ -192,6 +192,25 @@ public class LoRCard {
         this.regions = regions;
     }
 
+    public boolean deepEquals(LoRCard card) {
+        return this.cardCode.equals(card.cardCode) &&
+                this.cardName.equals(card.cardName) &&
+                this.type.equals(card.type) &&
+                this.subType.equals(card.subType) &&
+                this.rarity.equals(card.rarity) &&
+                this.keywords.equals(card.keywords) &&
+                this.lvlDesc.equals(card.lvlDesc) &&
+                this.formats.equals(card.formats) &&
+                this.flavour.equals(card.flavour) &&
+                this.artists.equals(card.artists) &&
+                this.regions.equals(card.regions) &&
+                this.collectible == card.collectible &&
+                this.cost == card.cost &&
+                this.power == card.power &&
+                this.health == card.health &&
+                this.desc.equals(card.desc);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

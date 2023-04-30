@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONAnalyzer {
+public class JSONExtractor {
 
     private BufferedReader bReader;
-    public JSONAnalyzer(BufferedReader br) {
+    public JSONExtractor(BufferedReader br) {
         this.bReader = br;
     }
 
@@ -53,21 +53,20 @@ public class JSONAnalyzer {
         return resultList;
     }
 
-    public void getCardRetrospective(String cardCode) {
-
+    public LoRCard getCardData(String cardCode) throws IOException {
         Gson gson = new Gson();
-        List<LoRCard> cards = new ArrayList<>();
-
-        try(JsonReader jsonReader = gson.newJsonReader(bReader)) {
-            jsonReader.setLenient(true);
-            jsonReader.beginArray();
-            while(jsonReader.hasNext()) {
-                System.out.println(parseJsonCardArray(jsonReader));
+        LoRCard card = null;
+        JsonReader jsonReader = gson.newJsonReader(bReader);
+        jsonReader.setLenient(true);
+        jsonReader.beginArray();
+        while(jsonReader.hasNext()) {
+            card = parseJsonCardArray(jsonReader);
+            if(card.getCardCode().equals(cardCode)) {
+                jsonReader.skipValue();
+                return card;
             }
-            jsonReader.endArray();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        jsonReader.endArray();
+        return card;
     }
 }

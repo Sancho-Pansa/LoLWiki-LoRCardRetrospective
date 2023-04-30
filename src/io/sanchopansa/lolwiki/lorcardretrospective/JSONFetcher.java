@@ -11,19 +11,22 @@ import java.net.URL;
 public class JSONFetcher {
     private String patchNumber = "latest";
     private String setCode;
-    private String cardCode;
 
     /* https://dd.b.pvp.net/<patch number>/set<set code>/ru_ru/data/set<set code>-ru_ru.json */
-    private String URLPrefix = "https://dd.b.pvp.net/";
+    private final String URL_PREFIX = "https://dd.b.pvp.net/";
 
-    public JSONFetcher(String setCode, String cardCode) {
+    public JSONFetcher(String setCode) {
         this.setCode = setCode;
-        this.cardCode = cardCode;
+    }
+
+    public JSONFetcher(String patchNumber, String setCode) {
+        this.patchNumber = patchNumber;
+        this.setCode = setCode;
     }
 
     public BufferedReader performConnection() throws MalformedURLException {
         URL url = new URL(String.format(
-                URLPrefix + "%s/set%s/ru_ru/data/set%s-ru_ru.json",
+                URL_PREFIX + "%s/set%s/ru_ru/data/set%s-ru_ru.json",
                 patchNumber,
                 setCode,
                 setCode
