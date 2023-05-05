@@ -15,7 +15,7 @@ public class LoRCard {
 
     private List<String> keywords;
     private int cost;
-    private int power;
+    private int attack;
     private int health;
 
     private String desc;
@@ -38,7 +38,7 @@ public class LoRCard {
                    boolean collectible,
                    List<String> keywords,
                    int cost,
-                   int power,
+                   int attack,
                    int health,
                    String desc,
                    String lvlDesc,
@@ -54,7 +54,7 @@ public class LoRCard {
         this.collectible = collectible;
         this.keywords = keywords;
         this.cost = cost;
-        this.power = power;
+        this.attack = attack;
         this.health = health;
         this.desc = desc;
         this.lvlDesc = lvlDesc;
@@ -128,12 +128,12 @@ public class LoRCard {
         this.cost = cost;
     }
 
-    public int getPower() {
-        return power;
+    public int getAttack() {
+        return attack;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
     public int getHealth() {
@@ -206,7 +206,7 @@ public class LoRCard {
                 this.regions.equals(card.regions) &&
                 this.collectible == card.collectible &&
                 this.cost == card.cost &&
-                this.power == card.power &&
+                this.attack == card.attack &&
                 this.health == card.health &&
                 this.desc.equals(card.desc);
     }
@@ -236,9 +236,9 @@ public class LoRCard {
                 .append(String.format("\tSubtype: %s\n", this.subType.isEmpty() ? "(none)" : this.subType.toString()))
                 .append(String.format("\tSubtype: %s\n", this.keywords.isEmpty() ? "(none)" : this.keywords.toString()))
                 .append(String.format("\tCost: %d\n", this.cost))
-                .append(String.format("\tPower: %d\n", this.power))
+                .append(String.format("\tPower: %d\n", this.attack))
                 .append(String.format("\tHealth: %d\n", this.health))
-                .append(String.format("\tPower: %d\n", this.power))
+                .append(String.format("\tPower: %d\n", this.attack))
                 .append(String.format("\tDescription: %s\n", this.desc))
                 .append(this.lvlDesc.equals("") ? String.format("\tLevel Up Description: %s\n", this.lvlDesc) : "")
                 .append(String.format("\tFlavour: %s\n", this.flavour))
@@ -297,8 +297,8 @@ public class LoRCard {
             return this;
         }
 
-        public cardBuilder power(int power) {
-            this.newCard.power = power;
+        public cardBuilder attack(int attack) {
+            this.newCard.attack = attack;
             return this;
         }
 

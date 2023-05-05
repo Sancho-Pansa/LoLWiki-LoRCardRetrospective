@@ -30,7 +30,7 @@ public class JSONExtractor {
                 case "collectible" -> cardBuilder.collectible(jReader.nextBoolean());
                 case "keywords" -> cardBuilder.keywords(parseJsonSubArray(jReader));
                 case "cost" -> cardBuilder.cost(jReader.nextInt());
-                case "power" -> cardBuilder.power(jReader.nextInt());
+                case "attack" -> cardBuilder.attack(jReader.nextInt());
                 case "health" -> cardBuilder.health(jReader.nextInt());
                 case "descriptionRaw" -> cardBuilder.desc(jReader.nextString());
                 case "levelupDescriptionRaw" -> cardBuilder.lvlDesc(jReader.nextString());
