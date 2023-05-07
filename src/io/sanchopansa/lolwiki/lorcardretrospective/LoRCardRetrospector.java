@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 
+// TODO: Распараллелить парсинг JSON
 public class LoRCardRetrospector {
     private final String cardCode;
     private final String PATCHES_LIST = "resources\\patches.txt";
