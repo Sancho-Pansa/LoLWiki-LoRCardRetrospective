@@ -43,11 +43,10 @@ public class JSONFetcher {
             if(responseCode == HttpURLConnection.HTTP_OK) {
                 InputStream is = urlConnection.getInputStream();
                 return new BufferedReader(new InputStreamReader(is));
-            } else {
-                throw new IOException("HTTP request return non-200 response");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 }
