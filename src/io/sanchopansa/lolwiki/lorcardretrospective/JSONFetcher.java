@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+//TODO: Проверка для карт из набора 6cde
 public class JSONFetcher {
     private String patchNumber = "latest";
     private String setCode;

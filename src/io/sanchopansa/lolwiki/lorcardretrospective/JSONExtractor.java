@@ -67,6 +67,6 @@ public class JSONExtractor {
             }
         }
         jsonReader.endArray();
-        return card;
+        return null;
     }
 }

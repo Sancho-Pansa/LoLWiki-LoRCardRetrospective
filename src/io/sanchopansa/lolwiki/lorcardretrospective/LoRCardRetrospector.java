@@ -1,7 +1,5 @@
 package io.sanchopansa.lolwiki.lorcardretrospective;
 
-import com.sun.source.tree.Tree;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -118,7 +116,9 @@ public class LoRCardRetrospector {
                     continue;
                 BufferedReader bReader = optionalBufferedReader.get();
                 JSONExtractor jsonExtractor = new JSONExtractor(bReader);
-                this.cardHistory.put(x, jsonExtractor.getCardData(cardCode));
+
+                Optional<LoRCard> optionalCard = Optional.ofNullable(jsonExtractor.getCardData(cardCode));
+                optionalCard.ifPresent((card) -> this.cardHistory.put(x, card));
                 bReader.close();
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
