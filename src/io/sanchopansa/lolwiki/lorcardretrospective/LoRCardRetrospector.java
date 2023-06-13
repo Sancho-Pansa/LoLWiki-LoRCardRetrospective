@@ -51,34 +51,33 @@ public class LoRCardRetrospector {
                 String patch = patches.get(i);
                 StringBuilder sBuilder = new StringBuilder();
                 if(!a.getCardName().equals(b.getCardName()))
-                    sBuilder.append(String.format("Name: %s → %s%n", a.getCardName(), b.getCardName()));
+                    sBuilder.append(String.format("Имя: %s → %s%n", a.getCardName(), b.getCardName()));
                 if(!a.getType().equals(b.getType()))
-                    sBuilder.append(String.format("Type: %s → %s%n", a.getCardName(), b.getCardName()));
+                    sBuilder.append(String.format("Тип: %s → %s%n", a.getCardName(), b.getCardName()));
                 if(!a.getRarity().equals(b.getRarity()))
-                    sBuilder.append(String.format("Rarity: %s → %s%n", a.getCardName(), b.getCardName()));
+                    sBuilder.append(String.format("Редкость: %s → %s%n", a.getCardName(), b.getCardName()));
                 if(!a.getDesc().equals(b.getDesc()))
-                    sBuilder.append(String.format("Desc: %s → %s%n", a.getDesc(), b.getDesc()));
+                    sBuilder.append(String.format("Описание: %s → %s%n", a.getDesc(), b.getDesc()));
                 if(!a.getLvlDesc().equals(b.getLvlDesc()))
-                    sBuilder.append(String.format("Level-up Desc: %s → %s%n", a.getLvlDesc(), b.getLvlDesc()));
+                    sBuilder.append(String.format("Условие повышения уровня: %s → %s%n", a.getLvlDesc(), b.getLvlDesc()));
                 if(!a.getFlavour().equals(b.getFlavour()))
-                    sBuilder.append(String.format("Flavour: %s → %s%n", a.getFlavour(), b.getFlavour()));
+                    sBuilder.append(String.format("Подпись: %s → %s%n", a.getFlavour(), b.getFlavour()));
                 if(!a.getArtists().equals(b.getArtists()))
-                    sBuilder.append(String.format("Artists: %s → %s%n", a.getArtists(), b.getArtists()));
+                    sBuilder.append(String.format("Художники: %s → %s%n", a.getArtists(), b.getArtists()));
                 if(a.getCost() != b.getCost())
-                    sBuilder.append(String.format("Cost: %d → %d%n", a.getCost(), b.getCost()));
+                    sBuilder.append(String.format("Стоимость: %d → %d%n", a.getCost(), b.getCost()));
                 if(a.getAttack() != b.getAttack())
-                    sBuilder.append(String.format("Power: %d → %d%n", a.getAttack(), b.getAttack()));
+                    sBuilder.append(String.format("Сила: %d → %d%n", a.getAttack(), b.getAttack()));
                 if(a.getHealth() != b.getHealth())
-                    sBuilder.append(String.format("Health: %d → %d%n", a.getHealth(), b.getHealth()));
+                    sBuilder.append(String.format("Здоровье: %d → %d%n", a.getHealth(), b.getHealth()));
                 if(a.isCollectible() != b.isCollectible())
-                    sBuilder.append(String.format("Collectible: %s → %s%n", a.isCollectible(), b.isCollectible()));
+                    sBuilder.append(String.format("Коллекционируемая: %s → %s%n", a.isCollectible(), b.isCollectible()));
                 if(!a.getKeywords().equals(b.getKeywords()))
-                    sBuilder.append(String.format("Keywords: %s → %s%n", a.getKeywords(), b.getKeywords()));
+                    sBuilder.append(String.format("Навыки: %s → %s%n", a.getKeywords(), b.getKeywords()));
                 if(!a.getSubType().equals(b.getSubType()))
-                    sBuilder.append(String.format("Subtype: %s → %s%n", a.getSubType(), b.getSubType()));
+                    sBuilder.append(String.format("Подтипы: %s → %s%n", a.getSubType(), b.getSubType()));
                 if(!a.getFormats().equals(b.getFormats()))
-                    sBuilder.append(String.format("Formats: %s → %s%n", a.getFormats(), b.getFormats()));
-                sBuilder.append("\n");
+                    sBuilder.append(String.format("Форматы: %s → %s%n", a.getFormats(), b.getFormats()));
                 changesMap.put(patch, sBuilder.toString());
             }
         }
@@ -111,18 +110,14 @@ public class LoRCardRetrospector {
         for(String x: patchesList) {
             JSONFetcher fetcher = new JSONFetcher(x, getSetFromCode());
             try {
-                Optional<BufferedReader> optionalBufferedReader = Optional.ofNullable(fetcher.performConnection());
-                if(optionalBufferedReader.isEmpty())
+                Optional<String> optionalJson = Optional.ofNullable(fetcher.fetchJson());
+                if(optionalJson.isEmpty())
                     continue;
-                BufferedReader bReader = optionalBufferedReader.get();
-                JSONExtractor jsonExtractor = new JSONExtractor(bReader);
+                JSONExtractor jsonExtractor = new JSONExtractor(optionalJson.get());
 
-                Optional<LoRCard> optionalCard = Optional.ofNullable(jsonExtractor.getCardData(cardCode));
-                optionalCard.ifPresent((card) -> this.cardHistory.put(x, card));
-                bReader.close();
+                Optional<LoRCard> optionalCard = Optional.ofNullable(jsonExtractor.getLoRCardByCode(this.cardCode));
+                optionalCard.ifPresent(card -> this.cardHistory.put(x, card));
             } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
