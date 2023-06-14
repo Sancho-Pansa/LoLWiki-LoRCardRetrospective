@@ -84,12 +84,16 @@ public class LoRCardRetrospector {
         return changesMap;
     }
 
-    public void printCardHistory() {
+    public String printCardHistory() {
+        StringBuilder sBuilder = new StringBuilder();
         Map<String, String> changes = getChangesList();
-        changes.forEach((a, b) -> {
-            System.out.println(a.replace("_", "."));
-            System.out.println(b);
-        });
+        changes.forEach((a, b) -> sBuilder
+                .append(a.replace("_", "."))
+                .append("\n")
+                .append(b)
+                .append("\n")
+        );
+        return sBuilder.toString();
     }
 
     private List<String> getPatchesList() {

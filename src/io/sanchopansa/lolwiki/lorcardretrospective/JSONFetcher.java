@@ -24,33 +24,6 @@ public class JSONFetcher {
         this.patchNumber = patchNumber;
         this.setCode = setCode;
     }
-
-    public BufferedReader performConnection() throws MalformedURLException {
-        URL url = new URL(String.format(
-                URL_PREFIX + "%s/set%s/ru_ru/data/set%s-ru_ru.json",
-                patchNumber,
-                setCode,
-                setCode
-                ));
-        System.out.println(url);
-        try {
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0");
-
-            int responseCode = urlConnection.getResponseCode();
-            System.out.println("HTTP :: " + responseCode);
-            if(responseCode == HttpURLConnection.HTTP_OK) {
-                InputStream is = urlConnection.getInputStream();
-                return new BufferedReader(new InputStreamReader(is));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }
-
     public String fetchJson() throws MalformedURLException {
         URL url = new URL(String.format(
                 URL_PREFIX + "%s/set%s/ru_ru/data/set%s-ru_ru.json",
