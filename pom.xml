@@ -29,10 +29,10 @@
     <build>
         <outputDirectory>${basedir}\out</outputDirectory>
         <testOutputDirectory>${basedir}\out\test-classes</testOutputDirectory>
-
+        <sourceDirectory>${basedir}\src</sourceDirectory>
         <resources>
             <resource>
-                <directory>${basedir}\src\resources</directory>
+                <directory>${basedir}\resources</directory>
             </resource>
         </resources>
 
